@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+  PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+<typeAliases>
+	<typeAlias type="com.edu.wepet.domain.Admin" alias="Admin"/>
+	<typeAlias type="com.edu.wepet.domain.Member" alias="Member"/>
+	<typeAlias type="com.edu.wepet.domain.Email" alias="Email"/>
+	<typeAlias type="com.edu.wepet.domain.Phone" alias="Phone"/>
+	<typeAlias type="com.edu.wepet.domain.Sns" alias="Sns"/>
+</typeAliases>
+ 
+  <mappers>
+	<mapper resource="com/edu/wepet/mybatis/AdminMapper.xml" />
+	<mapper resource="com/edu/wepet/mybatis/MemberMapper.xml" />
+	<mapper resource="com/edu/wepet/mybatis/EmailMapper.xml" />
+	<mapper resource="com/edu/wepet/mybatis/PhoneMapper.xml" />
+	<mapper resource="com/edu/wepet/mybatis/SnsMapper.xml" />
+  </mappers>
+</configuration>

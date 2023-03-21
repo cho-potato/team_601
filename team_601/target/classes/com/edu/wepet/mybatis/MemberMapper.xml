@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="Member">
+
+	<resultMap type="Member" id="memberMap">
+		<id column="member_idx" property="member_idx" />
+		<result column="id" property="id" />
+		<result column="nickname" property="nickname" />
+		<result column="regdate" property="regdate" />
+	
+		<association
+			column="email_idx" 
+			property="email"
+			javaType="Email"
+			select="Email.selectByMember"
+		/>
+
+		<association
+			column="phone_idx" 
+			property="phone"
+			javaType="Phone"
+			select="Phone.selectByMember"
+		/>
+		
+		<association
+			column="sns_idx" 
+			property="sns"
+			javaType="Sns"
+			select="Sns.selectByMember"
+		/>
+	
+	</resultMap>
+
+
+	<!-- 일반회원 리스트 불러오기 -->
+	<select id="selectAll" resultMap="memberMap">
+		select * from member
+	</select>
+	
+	<!-- 고유 id를 통한 회원 조회 -->
+	<select id="selectById" parameterType="String" resultType="Member">
+		select * from member where id=#{id}
+	</select>	
+
+	<!-- 한건 상세보기 -->
+	<select id="select" parameterType="int" resultMap="memberMap">
+		select * from member where member_idx=#{member_idx}
+	</select>
+	
+	<!-- 회원가입 -등록  -->
+	<insert id="insert" parameterType="Member">
+		insert into member(id, sns_idx, nickname, regdate ) 
+		values(#{id}, #{sns.sns_idx}, #{nickname}, #{regdate})
+	</insert>
+	
+	
+	<update id="update" parameterType="Member">
+		update member set id =#{id} 
+		, nickname=#{nickname}
+		where member_idx=#{member_idx}
+	</update>
+	
+	<delete id="delete" parameterType="int">
+		delete from member where member_idx=#{member_idx} 
+	</delete>
+
+</mapper>
